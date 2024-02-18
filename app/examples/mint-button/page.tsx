@@ -29,7 +29,8 @@ const nfts: {
     }),
   },
   {
-    src: "https://storage.googleapis.com/sbtdatastorage/01_test/pic/DALL%C2%B7E%202024-02-18%2013.48.50%20-%20Inside%20the%20sushi%20bar%2C%20a%20bear%20wearing%20a%20chef's%20hat%20is%20skillfully%20preparing%20sushi%20on%20a%20bamboo%20mat.%20The%20bear%20is%20focused%20and%20precise%2C%20surrounded%20by%20fresh%20.webp",
+    // src: "https://storage.googleapis.com/sbtdatastorage/01_test/pic/DALL%C2%B7E%202024-02-18%2013.48.50%20-%20Inside%20the%20sushi%20bar%2C%20a%20bear%20wearing%20a%20chef's%20hat%20is%20skillfully%20preparing%20sushi%20on%20a%20bamboo%20mat.%20The%20bear%20is%20focused%20and%20precise%2C%20surrounded%20by%20fresh%20.webp",
+    src: "https://magenta-profitable-narwhal-710.mypinata.cloud/ipfs/QmWJak1NV9pF9bu4RaMKYm2uoQrWeqVbxdWStcEQocTZg9/DALL%C2%B7E%202024-02-18%2013.48.44%20-%20A%20finely%20dressed%20bear%20standing%20proudly%20outside%20his%20unique%20sushi%20bar.%20The%20sushi%20bar%20exterior%20resembles%20a%20giant%20sushi%20roll,%20complete%20with%20rice%20and%20seawe.webp",
     tokenUrl: getTokenUrl({
       address: "0x060f3edd18c47f59bd23d063bbeb9aa4a8fec6df",
       chain: zora,
