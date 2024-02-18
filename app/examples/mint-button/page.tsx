@@ -13,14 +13,12 @@ import { zora } from "viem/chains";
 
 type State = {
   pageIndex: number;
-  spinning: boolean;
 };
 
 const nfts: {
   src: string;
   tokenUrl: string;
 }[] = [
-  // NFTの画像URLとトークンURLを定義
   {
     src: "https://ipfs.decentralized-content.com/ipfs/bafybeifs7vasy5zbmnpixt7tb6efi35kcrmpoz53d3vg5pwjz52q7fl6pq/cook.png",
     tokenUrl: getTokenUrl({
@@ -30,6 +28,7 @@ const nfts: {
     }),
   },
   {
+    // src: "https://remote-image.decentralized-content.com/image?url=https%3A%2F%2Fipfs.decentralized-content.com%2Fipfs%2Fbafybeiegrnialwu66u3nwzkn4gik4i2x2h4ip7y3w2dlymzlpxb5lrqbom&w=1920&q=75",
     src: "https://1.bp.blogspot.com/-wgq7rsKGgHk/X5Ocd_XeOyI/AAAAAAABb_A/QYte62QLgcw0EwBQybh6iH6rlIw4nsp1gCNcBGAsYHQ/s1029/photo_camera_man.png",
     tokenUrl: getTokenUrl({
       address: "0x060f3edd18c47f59bd23d063bbeb9aa4a8fec6df",
@@ -46,30 +45,30 @@ const nfts: {
     }),
   },
 ];
-const initialState: State = { pageIndex: 0, spinning: false };
+const initialState: State = { pageIndex: 0 };
 
 const reducer: FrameReducer<State> = (state, action) => {
-  // ルーレット回転アクションを追加
-  if (action.type === "SPIN_ROULETTE") {
-    return {
-      ...state,
-      pageIndex: Math.floor(Math.random() * nfts.length),
-      spinning: true,
-    };
-  }
+  const buttonIndex = action.postBody?.untrustedData.buttonIndex;
 
-  return state;
+  return {
+    pageIndex: buttonIndex
+      ? (state.pageIndex + (buttonIndex === 2 ? 1 : -1)) % nfts.length
+      : state.pageIndex,
+  };
 };
 
+// This is a react server component only
 export default async function Home({
   params,
   searchParams,
 }: NextServerPageProps) {
   const previousFrame = getPreviousFrame<State>(searchParams);
-  const [state, dispatch] = useFramesReducer<State>(reducer, initialState, previousFrame);
+  const [state] = useFramesReducer<State>(reducer, initialState, previousFrame);
 
+  // then, when done, return next frame
   return (
     <div>
+      Mint button example <Link href="/debug">Debug</Link>
       <FrameContainer
         pathname="/examples/mint-button"
         postUrl="/examples/mint-button/frames"
@@ -77,14 +76,15 @@ export default async function Home({
         previousFrame={previousFrame}
       >
         <FrameImage
-          src={nfts[state.pageIndex].src}
+          src={nfts[state.pageIndex]!.src}
           aspectRatio="1:1"
         ></FrameImage>
-        <FrameButton onClick={() => dispatch({ type: "SPIN_ROULETTE" })}>
-          Spin Roulette
+        <FrameButton>←</FrameButton>
+        <FrameButton>→</FrameButton>
+        <FrameButton action="mint" target={nfts[state.pageIndex]!.tokenUrl}>
+          Mint
         </FrameButton>
       </FrameContainer>
-      {state.spinning && <p>おみくじの結果がここに表示されます</p>}
     </div>
   );
 }
