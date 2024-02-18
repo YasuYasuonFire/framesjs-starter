@@ -20,7 +20,8 @@ const nfts: {
   tokenUrl: string;
 }[] = [
   {
-    src: "https://storage.googleapis.com/sbtdatastorage/01_test/pic/DALL%C2%B7E%202024-02-18%2013.48.44%20-%20A%20finely%20dressed%20bear%20standing%20proudly%20outside%20his%20unique%20sushi%20bar.%20The%20sushi%20bar%20exterior%20resembles%20a%20giant%20sushi%20roll%2C%20complete%20with%20rice%20and%20seawe.webp",
+    // src: "https://storage.googleapis.com/sbtdatastorage/01_test/pic/DALL%C2%B7E%202024-02-18%2013.48.44%20-%20A%20finely%20dressed%20bear%20standing%20proudly%20outside%20his%20unique%20sushi%20bar.%20The%20sushi%20bar%20exterior%20resembles%20a%20giant%20sushi%20roll%2C%20complete%20with%20rice%20and%20seawe.webp",
+    src: "https://ipfs.decentralized-content.com/ipfs/bafybeifs7vasy5zbmnpixt7tb6efi35kcrmpoz53d3vg5pwjz52q7fl6pq/cook.png",
     tokenUrl: getTokenUrl({
       address: "0x99de131ff1223c4f47316c0bb50e42f356dafdaa",
       chain: zora,
